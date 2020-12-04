@@ -1,0 +1,44 @@
+{% extends 'associates/header.html' %}
+{% block content %}
+
+<DIV class="left_right_panel">
+    <FIELDSET clsss="left">
+        <LEGEND>Dane lekarza</LEGEND>
+        {% if associate_details %}
+            Imię: {{ associate_details.name_text }}<BR>
+            Nazwisko: {{ associate_details.surname_text }}<BR>
+            Specjalizacja: {{ associate_details.specialization_text|default:"<span class='empty_value'>Brak</span>" }}<BR>
+            Nr PWZ: {{ associate_details.pwz_num|default:"<span class='empty_value'>Brak</span>" }}<BR>
+        {% else %}
+            <p class="emptyBin">Lista danych lekarza jest pusta</p>
+        {% endif %}
+    </FIELDSET>
+
+    <FIELDSET clsss="right">
+        <LEGEND>Adresy świadczeń</LEGEND>
+        {% if addresses_details %}
+        <DIV class="scrollDiv">
+            <DIV class="list">
+            {% for d in addresses_details %}
+                <DIV class="box_with_text">
+                Nazwa zakładu: {{ d.name_text }}<BR>
+                Adres: <BR>
+                {{ d.street_text|default:"" }} {{ d.number_text|default:"" }} {{ d.local_text|default:"" }}<BR>
+                {{ d.zip_code_text|default:"" }} {{ d.city_text|default:"" }}
+                </DIV>
+                <BR>
+                <BR>
+            {% endfor %}
+            </DIV>
+        </DIV>
+    {% else %}
+        <p class="emptyBin">Lista świadczeń lekarza jest pusta</p>
+    {% endif %}
+    </FIELDSET>
+</DIV>
+
+<SCRIPT>
+
+</SCRIPT>
+
+{% endblock %}

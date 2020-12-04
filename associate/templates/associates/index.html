@@ -1,0 +1,45 @@
+{% extends 'associates/header.html' %}
+{% block content %}
+
+
+{% if associate_list %}
+    <DIV class="scrollDiv">
+        <DIV class="list">
+        {% for d in associate_list %}
+            <a class="personButton" href="/associates/details/{{ d.id }}/">{{ d.name_text }} {{ d.surname_text }}</a><BR>
+        {% endfor %}
+        </DIV>
+        <BUTTON value="/associates/{{ last_page }}/">Załaduj kolejnych</BUTTON>
+    </DIV>
+{% else %}
+    <p class="emptyBin">Lista lekarzy jest pusta</p>
+{% endif %}
+
+
+<SCRIPT>
+    $("BUTTON").click(function(){
+        $.get($("BUTTON").val(), function(data, status){
+            if(status === "success")
+            {
+                if(data.associate_list.length == 0)
+                {
+                     $("BUTTON").addClass("disabledButton");
+                }
+                else
+                {
+                    $("BUTTON").removeClass("disabledButton");
+                    data.associate_list.forEach(function (item, index){
+                        $(".list").append("<a class='personButton' href='/associates/details/"+ item.id + "/'>" + item.name_text + " " + item.surname_text + "</a><BR>");
+                    });
+                    $("BUTTON").val("/associates/" + data.last_page + "/")
+                }
+            }
+            else
+            {
+                console.log("Jest coś nie tak");
+            }
+        });
+    });
+</SCRIPT>
+
+{% endblock %}

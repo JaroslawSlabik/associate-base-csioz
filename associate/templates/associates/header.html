@@ -1,0 +1,26 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Lekarze z CSIOZ</title>
+
+        <link rel="stylesheet" type="text/css" href="{% static "associate/css.css" %}"/>
+        <script type="text/javascript" src="{% static "associate/jquery-3.5.1.js" %}" ></script>
+    </head>
+    <body>
+        <HEADER>
+            <P class="mainTitle">Lista lekarzy z bazy CSIOZ</P>
+            <P class="subTitle">Strona napisana w technologiach: Python, django, jQuery, JS, CSS</P>
+        </HEADER>
+
+        <ARTICLE>
+        {% block content %}
+
+        {% endblock %}
+        </ARTICLE>
+
+        <FOOTER>Autor: Jarosław Słabik @ jarek.slabik@gmail.com</FOOTER>
+    </body>
+</html>
